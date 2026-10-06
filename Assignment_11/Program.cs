@@ -27,7 +27,40 @@
             #endregion
 
 
-            
+            #region  Question 2 (Shallow Copy vs Deep Copy)
+
+            // a) What is a Shallow Copy?
+            // create anew object in heap and copies the values of the original object's
+            // fields to the new object ,but objects point to the same nested objects.
+
+
+            // b) What is a Deep Copy?
+            // create a new object in heap and copies all the fields and nested objects to the new object.
+            // but the new object is independent of the original object.
+
+            // c) What happens to reference-type members when a Shallow Copy is created?
+            // still point to the same object - when a shallow copy is created, the reference-type members of the original
+            // object are copied to the new object, but both objects point to the same nested objects in memory.
+
+            // d) What happens to reference-type members when a Deep Copy is created?
+            // we create a new object in heap and will not point to the same object - when a deep copy is created,
+            // the reference-type members of the original object are copied to the new object, and both objects point to different nested objects in memory.
+
+            // e) Give one situation where Deep Copy would be safer than Shallow Copy.
+            // Deep Copy would be safer than Shallow Copy when you want to create a new object that is independent
+            // of the original object, and you want to avoid effects caused by changes to the original
+            // object's nested objects. For example, if you have a class that contains a list of items,
+            // and you want to create a copy of that class without affecting the original list, you would use Deep Copy.
+            // or if i want to change the nested object of original without affecting the copied object.
+
+            #endregion
+
+
+            #region Question Part 02 : Practical
+            //   Part 02 : Practical   //
+
+
+            #endregion
 
         }
     }
