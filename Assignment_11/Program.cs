@@ -82,6 +82,28 @@
             #endregion
 
 
+            #region  Question 4 (Extension Methods)
+
+            // a) What is an Extension Method?
+            // it is a special kind of static method that allows you to add new behaviors
+            // to an existing type without modifying its originalsource code.
+
+
+            //  b) What keyword must be used in the first parameter of an extension method?
+            // the "this" keyword .
+
+
+            // c) Where must an extension method be declared?
+            // it must be declared in a static class.
+
+
+            // d) Can an extension method access private members of the class it extends?
+            // No, It can only access public and protected members.
+
+
+            #endregion
+
+
             #region Question Part 02 : Practical
             //   Part 02 : Practical   //
 
