@@ -126,55 +126,197 @@
             #endregion
 
 
-            #region Question Part 02 : Practical
+            #region Question Part 02 :  All Practical
             //   Part 02 : Practical   //
 
-            DeliveryAddress address = new DeliveryAddress("Cairo", "Nasr City", 10);
+            
+                DeliveryUtilities.PrintSystemTitle();
 
-            StandardShipment standardShipment = new StandardShipment("SH001", "Laptop", 3, 80, address);
+                Shipment.GetTotalShipmentsCreated();
 
-            Console.WriteLine("==========================================");
-            Console.WriteLine("Object Copying");
-            Console.WriteLine("==========================================");
+                DeliveryUtilities.PrintSeparator();
+                Console.WriteLine("Creating Shipments...");
+                DeliveryUtilities.PrintSeparator();
 
-            Shipment shipment1 = standardShipment;
-            Shipment shipment2 = shipment1;
-            Console.WriteLine("Original Shipment  : " + shipment1.TrackingCode);
-            Console.WriteLine("Copy Shipment  : " + shipment2.TrackingCode);
-            Console.WriteLine();
-            Console.WriteLine("Same Object : " + ReferenceEquals(shipment1, shipment2));
+                StandardShipment standardShipment =
+                    new StandardShipment(
+                        "SH001",
+                        "Laptop",
+                        3m,
+                        80m,
+                        new DeliveryAddress("Cairo", "Street 1", 10));
+
+                ExpressShipment expressShipment =
+                    new ExpressShipment(
+                        "SH002",
+                        "Mobile Phone",
+                        2m,
+                        60m,
+                        new DeliveryAddress("Cairo", "Street 2", 20),
+                        30m);
+
+                InternationalShipment internationalShipment =
+                    new InternationalShipment(
+                        "SH003",
+                        "Television",
+                        8m,
+                        120m,
+                        new DeliveryAddress("Cairo", "Street 3", 30),
+                        "Germany",
+                        100m);
+
+                Console.WriteLine("Standard Shipment Created");
+                Console.WriteLine("Express Shipment Created");
+                Console.WriteLine("International Shipment Created");
+                Console.WriteLine();
+
+                Console.WriteLine(
+                    $"Total Shipments Created : " +
+                    $"{Shipment.GetTotalShipmentsCreated()}");
+
+                DeliveryUtilities.PrintSeparator();
+                Console.WriteLine("Object Copying");
+                DeliveryUtilities.PrintSeparator();
+
+                Shipment shipment1 = standardShipment;
+                Shipment shipment2 = shipment1;
+
+                Console.WriteLine(
+                    $"Original Shipment : {shipment1.TrackingCode}");
+
+                Console.WriteLine(
+                    $"Assigned Shipment : {shipment2.TrackingCode}");
+
+                Console.WriteLine();
+
+                Console.WriteLine(
+                    $"Same Object : {ReferenceEquals(shipment1, shipment2)}");
 
 
-            Shipment shallowcopy = shipment1.ShallowCopy();
-            Console.WriteLine("------------------------------------------");
-            Console.WriteLine("Shallow Copy");
-            Console.WriteLine("------------------------------------------");
-            Console.WriteLine("Original Shipment Address : " + shipment1.DeliveryAddress.City);
-            Console.WriteLine("Copied Shipment Address   : " + shallowcopy.DeliveryAddress.City);
-            Console.WriteLine("Changing copied shipment address... ");
-            shallowcopy.DeliveryAddress.City = "Giza";
-            Console.WriteLine("Original Shipment Address : " + shipment1.DeliveryAddress.City);
-            Console.WriteLine("Copied Shipment Address   : " + shallowcopy.DeliveryAddress.City);
-            Console.WriteLine("Same DeliveryAddress Object : " + ReferenceEquals(shipment1.DeliveryAddress.City, shallowcopy.DeliveryAddress.City));
+                Console.WriteLine();
+                Console.WriteLine("------------------------------------------");
+                Console.WriteLine("Shallow Copy");
+                Console.WriteLine("------------------------------------------");
+
+                Shipment shallowCopy = shipment1.ShallowCopy();
+
+                Console.WriteLine(
+                    $"Original Shipment Address : " +
+                    $"{shipment1.DeliveryAddress.City}");
+
+                Console.WriteLine(
+                    $"Copied Shipment Address : " +
+                    $"{shallowCopy.DeliveryAddress.City}");
+
+                Console.WriteLine();
+                Console.WriteLine("Changing copied shipment address...");
+
+                shallowCopy.DeliveryAddress.City = "Giza";
+
+                Console.WriteLine();
+
+                Console.WriteLine(
+                    $"Original Shipment Address : " +
+                    $"{shipment1.DeliveryAddress.City}");
+
+                Console.WriteLine(
+                    $"Copied Shipment Address : " +
+                    $"{shallowCopy.DeliveryAddress.City}");
+
+                Console.WriteLine(
+                    $"Same DeliveryAddress Object : " +
+                    $"{ReferenceEquals(shipment1.DeliveryAddress,
+                                       shallowCopy.DeliveryAddress)}");
+
+                shipment1.DeliveryAddress.City = "Cairo";
+
+                Console.WriteLine();
+                Console.WriteLine("------------------------------------------");
+                Console.WriteLine("Deep Copy");
+                Console.WriteLine("------------------------------------------");
+
+                Shipment deepCopy = shipment1.DeepCopy();
+
+                Console.WriteLine(
+                    $"Original Shipment Address : " +
+                    $"{shipment1.DeliveryAddress.City}");
+
+                Console.WriteLine(
+                    $"Copied Shipment Address : " +
+                    $"{deepCopy.DeliveryAddress.City}");
+
+                Console.WriteLine();
+                Console.WriteLine("Changing copied shipment address...");
+
+                deepCopy.DeliveryAddress.City = "Giza";
+
+                Console.WriteLine();
+
+                Console.WriteLine(
+                    $"Original Shipment Address : " +
+                    $"{shipment1.DeliveryAddress.City}");
+
+                Console.WriteLine(
+                    $"Copied Shipment Address : " +
+                    $"{deepCopy.DeliveryAddress.City}");
+
+                Console.WriteLine(
+                    $"Same DeliveryAddress Object : " +
+                    $"{ReferenceEquals(shipment1.DeliveryAddress,
+                                       deepCopy.DeliveryAddress)}");
+
+                Console.WriteLine();
+                DeliveryUtilities.PrintSeparator();
+                Console.WriteLine("Extension Methods");
+                DeliveryUtilities.PrintSeparator();
+
+                Console.WriteLine(standardShipment.GetSummary());
+                Console.WriteLine(expressShipment.GetSummary());
+                Console.WriteLine(internationalShipment.GetSummary());
+
+                Console.WriteLine();
+
+                Console.WriteLine(
+                    $"SH001 Is Delivered : {standardShipment.IsDelivered()}");
+
+                Console.WriteLine(
+                    $"SH003 Is Delivered : {internationalShipment.IsDelivered()}");
+
+                Console.WriteLine();
+                DeliveryUtilities.PrintSeparator();
+                Console.WriteLine("Tracking Status");
+                DeliveryUtilities.PrintSeparator();
+
+                expressShipment.UpdateTrackingStatus("Out For Delivery");
 
 
-            Shipment deepcopy = shipment1.DeepCopy();
-            Console.WriteLine("------------------------------------------");
-            Console.WriteLine("Deep Copy");
-            Console.WriteLine("------------------------------------------");
-            deepcopy.DeliveryAddress.City = "Cairo";
-            shipment1.DeliveryAddress.City = "Cairo";
-            Console.WriteLine("Original Shipment Address : " + shipment1.DeliveryAddress.City);
-            Console.WriteLine("Copied Shipment Address   : " + deepcopy.DeliveryAddress.City);
-            Console.WriteLine("Changing copied shipment address... ");
-            deepcopy.DeliveryAddress.City = "Giza";
-            Console.WriteLine($"Original Shipment Address : {shipment1.DeliveryAddress.City}");
-            Console.WriteLine($"Copied Shipment Address   : {deepcopy.DeliveryAddress.City}");
-            Console.WriteLine("Same DeliveryAddress Object : " + ReferenceEquals(shipment1.DeliveryAddress.City, deepcopy.DeliveryAddress.City));
+                Console.WriteLine();
+                DeliveryUtilities.PrintSeparator();
+                Console.WriteLine("Static Utilities");
+                DeliveryUtilities.PrintSeparator();
+
+                DeliveryUtilities.PrintSeparator();
+                Console.WriteLine("Delivery Center");
+                DeliveryUtilities.PrintSeparator();
+
+                Console.WriteLine(
+                    $"Total Shipments Created : " +
+                    $"{Shipment.GetTotalShipmentsCreated()}");
 
 
-            #endregion
+                Console.WriteLine();
+                DeliveryUtilities.PrintSeparator();
+                Console.WriteLine("Partial Method");
+                DeliveryUtilities.PrintSeparator();
 
+                standardShipment.UpdateTrackingStatus("Delivered");
+
+                DeliveryUtilities.PrintSeparator();
+                Console.WriteLine("Assignment Completed");
+                DeliveryUtilities.PrintSeparator();
+            }
         }
     }
-}
+
+    #endregion
+

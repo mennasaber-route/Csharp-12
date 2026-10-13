@@ -4,12 +4,21 @@ using System.Text;
 
 namespace Assignment_11
 {
-    public abstract class Shipment
+    public abstract partial class Shipment
     {
         private string _trackingCode;
         private string _description;
         private decimal _weight;
         private decimal _deliveryFee;
+
+        public static int TotalShipmentsCreated;
+
+        static Shipment()
+        {
+            TotalShipmentsCreated = 0;
+            Console.WriteLine("Shipment System Initialized");
+            //TotalShipmentsCreated++;
+        }
 
 
         public string TrackingCode
@@ -98,6 +107,8 @@ namespace Assignment_11
             Description = description;
             Weight = weight;
             DeliveryFee = deliveryFee;
+
+            TotalShipmentsCreated++;
         }
 
         public void UpdateDeliveryFee(decimal newFee)
@@ -148,6 +159,18 @@ namespace Assignment_11
             return deepCopy;
         }
 
+
+        public static int GetTotalShipmentsCreated()
+        {
+            return TotalShipmentsCreated;
+        }
+
+
+        partial void OnTrackingStatusChanged(string newStatus)
+        {
+            Console.WriteLine(
+                $"Tracking status changed to: {newStatus}");
+        }
 
     }
 }
